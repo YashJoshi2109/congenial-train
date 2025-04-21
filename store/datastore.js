@@ -1,2 +1,2 @@
-// primary store object
+// primary store objecteee
 module.exports = {};
