@@ -26,11 +26,11 @@ export default class MusiciansAdmin extends Component {
     }
   }
 
-  handleUpdateMusician = (id, name) => {
+  handleUpdateMusician = (id, firstName) => {
     // add call to AWS API Gateway update musician endpoint here
     const musicianToUpdate = [...this.state.musicians].find(musician => musician.id === id);
     const updatedMusicians = [...this.state.musicians].filter(musician => musician.id !== id);
-    musicianToUpdate.musicianname = name;
+    musicianToUpdate.firstName = firstName;
     updatedMusicians.push(musicianToUpdate);
     this.setState({musicians: updatedMusicians});
   }

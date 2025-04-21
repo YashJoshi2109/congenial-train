@@ -32,7 +32,7 @@ export default class Musicians extends Component {
                 <div className="tile is-ancestor">
                     { 
                       this.state.musicians && this.state.musicians.length > 0
-                      ? this.state.musicians.map(musician => <Musician name={musician.musicianname} id={musician.id} key={musician.id} />)
+                      ? this.state.musicians.map(musician => <Musician firstname={musician.firstName} lastname={musician.lastName} id={musician.id} key={musician.id} />)
                       : <div className="tile notification is-warning">No musicians available</div>
                     }
                 </div>
