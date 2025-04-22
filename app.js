@@ -8,7 +8,7 @@ const musicianRoutes = require('./routes/musician');
 const app = express();
 const port = process.env.PORT || 8081;
 
-// include routes
+// include routess
 app.use('/musician', musicianRoutes);
 
 app.use(express.static('public'));
