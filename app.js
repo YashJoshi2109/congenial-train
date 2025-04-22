@@ -6,7 +6,7 @@ const Musician = require('./models/musician');
 const musicianRoutes = require('./routes/musician');
 
 const app = express();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8000;
 
 // include routess
 app.use('/musician', musicianRoutes);
