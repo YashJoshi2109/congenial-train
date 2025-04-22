@@ -13,7 +13,7 @@ app.use('/musician', musicianRoutes);
 
 app.use(express.static('public'));
 
-// Index route
+// Index ro222ute
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
