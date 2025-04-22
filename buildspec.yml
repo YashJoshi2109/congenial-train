@@ -26,6 +26,8 @@ artifacts:
 option_settings:
   aws:elasticbeanstalk:container:nodejs:
     NodeCommand: "npm start"
+  aws:elasticbeanstalk:application:environment:
+    PORT: 8081
   aws:elasticbeanstalk:container:nodejs:staticfiles:
     /public: /public
 
@@ -36,7 +38,7 @@ files:
     group: root
     content: |
       upstream nodejs {
-        server 127.0.0.1:8081;
+        server localhost:8081;
         keepalive 256;
       }
 
@@ -53,8 +55,20 @@ files:
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         }
+
+        gzip on;
+        gzip_comp_level 4;
+        gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
       }
 
 container_commands:
   01_reload_nginx:
     command: "service nginx reload"
+
+node_modules
+npm-debug.log
+.git
+.gitignore
+.env
+
+web: npm start
