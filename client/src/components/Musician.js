@@ -4,7 +4,8 @@ export default class MusicianAdmin extends Component {
 
   state = {
     isEditMode: false,
-    updatedmusicianname: this.props.name
+    updatedFirstName: this.props.firstname,
+    updatedLastName: this.props.lastname
   }
 
   handleMusicianEdit = event => {
@@ -15,10 +16,11 @@ export default class MusicianAdmin extends Component {
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateMusician(this.props.id, this.state.updatedmusicianname);
+    this.props.handleUpdateMusician(this.props.id, this.state.updatedFirstName, this.state.updatedLastName);
   }
 
-  onAddMusicianNameChange = event => this.setState({ "updatedmusicianname": event.target.value });
+  onAddMusicianFirstNameChange = event => this.setState({ "updatedFirstName": event.target.value });
+  onAddMusicianLastNameChange = event => this.setState({ "updatedLastName": event.target.value });
 
   render() {
     return (
@@ -36,9 +38,16 @@ export default class MusicianAdmin extends Component {
                 <input 
                   className="input is-medium"
                   type="text" 
-                  placeholder="Enter name"
-                  value={this.state.updatedmusicianname}
-                  onChange={this.onAddMusicianNameChange}
+                  placeholder="Enter first name"
+                  value={this.state.updatedFirstName}
+                  onChange={this.onAddMusicianFirstNameChange}
+                />
+                <input 
+                  className="input is-medium"
+                  type="text" 
+                  placeholder="Enter last name"
+                  value={this.state.updatedLastName}
+                  onChange={this.onAddMusicianLastNameChange}
                 />
                 <p className="musician-id">id: { this.props.id }</p>
                 <button type="submit" 
