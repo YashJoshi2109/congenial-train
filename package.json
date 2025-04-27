@@ -1,5 +1,5 @@
 {
-  "name": "musician-app",
+  "name": "elasticbeanstalk-node-app",
   "version": "1.0.0",
   "description": "A NodeJS REST API poc",
   "main": "app.js",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "winston": "^3.2.1",
     "yup": "^1.6.1"
   },
