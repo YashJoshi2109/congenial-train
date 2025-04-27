@@ -22,7 +22,7 @@ ENV NODE_ENV=production
 ENV PORT=8081
 
 # Expose the port
-EXPOSE 8081
+EXPOSE 80
 
 # Start the application
 CMD ["npm", "start"]
