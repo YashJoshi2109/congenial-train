@@ -1,27 +1,58 @@
 ﻿version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install -g npm@latest
+      - npm cache clean --force
+
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 232413781275.dkr.ecr.us-east-2.amazonaws.com
-      - REPOSITORY_URI=232413781275.dkr.ecr.us-east-2.amazonaws.com/musician-app
-      - IMAGE_TAG=latest
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+
   build:
     commands:
       - echo Build started on `date`
+      - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:latest
+
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:latest > imageDefinitions.json
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDefinitions.json
+      - cat imageDefinitions.json
 
 artifacts:
   files:
     - imageDefinitions.json
+    - appspec.yml
+    - taskdef.json
+    - Dockerrun.aws.json
+    - buildspec.yml
+    - package.json
+    - package-lock.json
+    - app.js
+    - public/**/*
+    - routes/**/*
+    - models/**/*
+    - client/**/*
+
+cache:
+  paths:
+    - node_modules/**/*
+    - .npm/**/*
 
 option_settings:
   aws:elasticbeanstalk:container:nodejs:
