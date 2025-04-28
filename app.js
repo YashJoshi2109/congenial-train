@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // Catch-all route for React or static files
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build/index.html"));
+  res.sendFile(path.join(__dirname, "client/build/index.js"));
 });
 
 // initialize store
