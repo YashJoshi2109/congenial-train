@@ -13,7 +13,12 @@ app.use("/musician", musicianRoutes);
 
 app.use(express.static("public"));
 
-// Index ro222ute
+// Health check route
+app.get("/", (req, res) => {
+  res.send("Node.js app is running successfully on Elastic Beanstalk!");
+});
+
+// Catch-all route for React or static files
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
@@ -22,11 +27,6 @@ app.get("*", (req, res) => {
 const musician = new Musician(store);
 musician.initStore(initialStoreData);
 app.locals.musician = musician;
-
-// Health check route (Elastic Beanstalk expects this to return 200 OK)
-app.get("/", (req, res) => {
-  res.send("Node.js app is running successfully on Elastic Beanstalk!");
-});
 
 // start serverhhh3
 const server = app.listen(port, "0.0.0.0", () => {
