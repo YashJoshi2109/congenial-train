@@ -1,20 +1,15 @@
 {
   "name": "elasticbeanstalk-node-app",
   "version": "1.0.0",
-  "description": "A NodeJS REST API poc",
-  "main": "app.js",
+  "description": "A secure Node.js app for AWS Elastic Beanstalk",
+  "main": "server.js",
   "scripts": {
-    "test": "jest",
-    "start": "node app.js",
-    "start-dev": "nodemon app.js"
+    "start": "node server.js"
   },
   "author": "Yaffsh",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.18.2",
-    "winston": "^3.2.1",
-    "yup": "^1.6.1"
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "jest": "^29.7.0",

@@ -8,7 +8,7 @@ RUN npm run build
 
 # Production stage
 FROM node:18-alpine
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY --from=builder /usr/src/app/package*.json ./
 RUN npm ci --only=production
 COPY --from=builder /usr/src/app/dist ./dist
@@ -19,7 +19,7 @@ COPY --from=builder /usr/src/app/client ./client
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=8081
+ENV PORT=80
 
 # Expose the port
 EXPOSE 80
