@@ -9,7 +9,7 @@
   "author": "Yaffsh",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.22.3"
   },
   "devDependencies": {
     "jest": "^29.7.0",
